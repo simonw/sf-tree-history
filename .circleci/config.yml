@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  fetch_and_commit:
+    docker:
+      - image: circleci/python:3.6.4
+    steps:
+      - checkout
+      - run:
+          command: |
+            cp Street_Tree_List.csv Street_Tree_List-old.csv
+            curl -o Street_Tree_List.csv "https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+            git add Street_Tree_List.csv
+            git config --global user.email "treebot@example.com"
+            git config --global user.name "Treebot"
+            sudo pip install csv-diff
+            csv-diff Street_Tree_List-old.csv Street_Tree_List.csv --key=TreeID > message.txt
+            git commit -F message.txt && \
+              git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/simonw/sf-tree-history.git master \
+              || true
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - fetch_and_commit
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - fetch_and_commit
