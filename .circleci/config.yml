@@ -14,6 +14,7 @@ jobs:
             git config --global user.name "Treebot"
             sudo pip install csv-diff
             csv-diff Street_Tree_List-old.csv Street_Tree_List.csv --key=TreeID > message.txt
+            echo "[skip ci]" >> message.txt
             git commit -F message.txt && \
               git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/simonw/sf-tree-history.git master \
               || true
