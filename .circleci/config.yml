@@ -8,7 +8,8 @@ jobs:
       - run:
           command: |
             cp Street_Tree_List.csv Street_Tree_List-old.csv
-            curl -o Street_Tree_List.csv "https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+            curl -o Street_Tree_List-unsorted.csv "https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+            sort Street_Tree_List-unsorted.csv > Street_Tree_List.csv
             git add Street_Tree_List.csv
             git config --global user.email "treebot@example.com"
             git config --global user.name "Treebot"
