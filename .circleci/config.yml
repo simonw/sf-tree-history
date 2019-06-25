@@ -16,7 +16,7 @@ jobs:
             git add Street_Tree_List.csv
             git config --global user.email "treebot@example.com"
             git config --global user.name "Treebot"
-            sudo pip install csv-diff>=0.5
+            sudo pip install -r requirements.txt
             csv-diff Street_Tree_List-old.csv Street_Tree_List.csv --key=TreeID --singular=tree --plural=trees > message.txt
             echo $'\n[skip ci]' >> message.txt
             git commit -F message.txt && \
