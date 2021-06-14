@@ -8,4 +8,4 @@ This repository [uses CircleCI](https://circleci.com/gh/simonw/sf-tree-history) 
 
 It uses [csv-diff](https://github.com/simonw/csv-diff) to generate human-readable commit messages.
 
-You can see recent changes to the CSV file here: https://github.com/simonw/sf-tree-history/commits/master
+You can see recent changes to the CSV file here: https://github.com/simonw/sf-tree-history/commits/main
